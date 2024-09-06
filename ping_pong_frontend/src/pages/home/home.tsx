@@ -118,21 +118,10 @@ function Home () {
                         return;
                     }
 
-                    if (!account) { 
-                        console.log('Account is not ready');
-                        return;
-                    }
-
-                    const response = await sails.query(
-                        'Query/LastWhoCall',
-                        {
-                            userId: account.decodedAddress
-                        }
-                    ) as [string, string];
+                    const response = await sails.query('Query/LastWhoCall') as [string, string];
 
                     console.log(response);
-
-
+                    
                     setStateEnum(response[1]);
                     setStateActorId(response[0]);
 
