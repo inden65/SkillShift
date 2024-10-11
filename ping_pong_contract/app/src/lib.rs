@@ -1,12 +1,7 @@
 #![no_std]
 use sails_rs::{
     prelude::*,
-    gstd::{
-        program,
-        route,
-        msg
-    },
-    cell::RefCell
+    gstd::msg
 };
 
 pub mod service;
@@ -16,40 +11,28 @@ use service::{
     ping_pong_service::PingService,
     query_service::QueryService
 };
-use states::ping_pong_state::{
-    PingState,
-    PingEnum
-};
 
-pub struct PingProgram {
-    pub ping_service: RefCell<PingState>
-}
+// Ping program struct
+#[derive(Default)]
+pub struct PingProgram;
 
 
+// Program of the contract
 #[program]  
 impl PingProgram {
     pub fn new() -> Self {
-        let ping_service = RefCell::new(PingState {
-            last_who_call: (msg::source(), PingEnum::Ping),
-            all_calls: Vec::new()
-        });
+        PingService::seed(msg::source());
 
-        Self {
-            ping_service
-        }
+        Self
     }
 
     #[route("Ping")]
-    pub fn ping_svc(&self) -> PingService<'_> {
-        PingService::new(
-            self.ping_service.borrow_mut()
-        )
+    pub fn ping_svc(&self) -> PingService {
+        PingService::new()
     }
 
     #[route("Query")]
-    pub fn query_svc(&self) -> QueryService<'_> {
-        QueryService::new(
-            self.ping_service.borrow()
-        )
+    pub fn query_svc(&self) -> QueryService {
+        QueryService::new()
     }
 }

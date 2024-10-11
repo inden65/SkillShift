@@ -24,7 +24,7 @@ export const sponsorName = "";
 export const sponsorMnemonic = "";
 
 export const CONTRACT_DATA: ContractSails = {
-  programId: '0xe93d33f636eca35250f465e61ad2adde51c875c741702b18a68fc3308348b1eb',
+  programId: '0x84b6a64e165f46efd39e3b35876e03710b0fbe06fc896d50b5e096995836bb59',
   idl: `
     type PingEnum = enum {
       Ping,

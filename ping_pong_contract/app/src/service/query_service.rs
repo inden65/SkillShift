@@ -1,38 +1,35 @@
-use sails_rs::{
-    prelude::*,
-    gstd::service,
-    cell::Ref
-};
+use sails_rs::prelude::*;
 
 use crate::states::ping_pong_state::{
     PingState,
     UserData
 };
 
-pub struct QueryService<'a> {
-    ping_state: Ref<'a, PingState>
-}
+// Struct to be used for query service
+#[derive(Default)]
+pub struct QueryService;
 
+// Query service
+// Here you can find all queries methods for the contract
 #[service]
-impl<'a> QueryService<'a> {
-    pub fn new(
-        ping_state: Ref<'a, PingState>
-    ) -> Self {
-        Self {
-            ping_state
-        }
+impl QueryService {
+    // Service's constructor
+    pub fn new() -> Self {
+        Self
     }
     
+    // Method that will return data from the last caller
+    // Its a query because it only reads the state (it not change the state)
     pub fn last_who_call(&self) -> UserData {
-        self
-            .ping_state
-            .last_who_call
-            .to_owned()
+        let (last_caller, action) = &PingState::state_ref().last_who_call;
+
+        (*last_caller, action.clone())
     }
 
+    // Method that will return all the calls of the contract
+    // Its a query because it only reads the state (it not change the state)
     pub fn all_calls(&self) -> Vec<UserData> {
-        self
-            .ping_state
+        PingState::state_ref()
             .all_calls
             .to_owned()
     }
