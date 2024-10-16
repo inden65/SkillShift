@@ -59,6 +59,12 @@ impl<R: Remoting + Clone> traits::Ping for Ping<R> {
     fn pong(&mut self) -> impl Call<Output = PingEnum, Args = R::Args> {
         RemotingAction::<_, ping::io::Pong>::new(self.remoting.clone(), ())
     }
+    fn all_calls(&self) -> impl Query<Output = Vec<(ActorId, PingEnum)>, Args = R::Args> {
+        RemotingAction::<_, ping::io::AllCalls>::new(self.remoting.clone(), ())
+    }
+    fn last_who_call(&self) -> impl Query<Output = (ActorId, PingEnum), Args = R::Args> {
+        RemotingAction::<_, ping::io::LastWhoCall>::new(self.remoting.clone(), ())
+    }
 }
 
 pub mod ping {
@@ -91,32 +97,6 @@ pub mod ping {
             type Params = ();
             type Reply = super::PingEnum;
         }
-    }
-}
-pub struct Query<R> {
-    remoting: R,
-}
-impl<R> Query<R> {
-    pub fn new(remoting: R) -> Self {
-        Self { remoting }
-    }
-}
-impl<R: Remoting + Clone> traits::Query for Query<R> {
-    type Args = R::Args;
-    fn all_calls(&self) -> impl Query<Output = Vec<(ActorId, PingEnum)>, Args = R::Args> {
-        RemotingAction::<_, query::io::AllCalls>::new(self.remoting.clone(), ())
-    }
-    fn last_who_call(&self) -> impl Query<Output = (ActorId, PingEnum), Args = R::Args> {
-        RemotingAction::<_, query::io::LastWhoCall>::new(self.remoting.clone(), ())
-    }
-}
-
-pub mod query {
-    use super::*;
-
-    pub mod io {
-        use super::*;
-        use sails_rs::calls::ActionIo;
         pub struct AllCalls(());
         impl AllCalls {
             #[allow(dead_code)]
@@ -126,7 +106,7 @@ pub mod query {
         }
         impl ActionIo for AllCalls {
             const ROUTE: &'static [u8] = &[
-                20, 81, 117, 101, 114, 121, 32, 65, 108, 108, 67, 97, 108, 108, 115,
+                16, 80, 105, 110, 103, 32, 65, 108, 108, 67, 97, 108, 108, 115,
             ];
             type Params = ();
             type Reply = Vec<(ActorId, super::PingEnum)>;
@@ -140,7 +120,7 @@ pub mod query {
         }
         impl ActionIo for LastWhoCall {
             const ROUTE: &'static [u8] = &[
-                20, 81, 117, 101, 114, 121, 44, 76, 97, 115, 116, 87, 104, 111, 67, 97, 108, 108,
+                16, 80, 105, 110, 103, 44, 76, 97, 115, 116, 87, 104, 111, 67, 97, 108, 108,
             ];
             type Params = ();
             type Reply = (ActorId, super::PingEnum);
@@ -170,11 +150,6 @@ pub mod traits {
         type Args;
         fn ping(&mut self) -> impl Call<Output = PingEnum, Args = Self::Args>;
         fn pong(&mut self) -> impl Call<Output = PingEnum, Args = Self::Args>;
-    }
-
-    #[allow(clippy::type_complexity)]
-    pub trait Query {
-        type Args;
         fn all_calls(&self) -> impl Query<Output = Vec<(ActorId, PingEnum)>, Args = Self::Args>;
         fn last_who_call(&self) -> impl Query<Output = (ActorId, PingEnum), Args = Self::Args>;
     }

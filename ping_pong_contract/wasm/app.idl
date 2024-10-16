@@ -10,9 +10,6 @@ constructor {
 service Ping {
   Ping : () -> PingEnum;
   Pong : () -> PingEnum;
-};
-
-service Query {
   query AllCalls : () -> vec struct { actor_id, PingEnum };
   query LastWhoCall : () -> struct { actor_id, PingEnum };
 };

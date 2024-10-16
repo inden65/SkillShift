@@ -7,10 +7,7 @@ use sails_rs::{
 pub mod service;
 pub mod states;
 
-use service::{
-    ping_pong_service::PingService,
-    query_service::QueryService
-};
+use service::ping_pong_service::PingService;
 
 // Ping program struct
 #[derive(Default)]
@@ -29,10 +26,5 @@ impl PingProgram {
     #[route("Ping")]
     pub fn ping_svc(&self) -> PingService {
         PingService::new()
-    }
-
-    #[route("Query")]
-    pub fn query_svc(&self) -> QueryService {
-        QueryService::new()
     }
 }
