@@ -42,5 +42,5 @@ sudo apt install binaryen
 
 Now, you can compile and use the frontend!
 
-- The contract is located in `ping_pong_contract` directory, it contrains extra [instructios](https://github.com/Vara-Lab/traffic-light-integration/blob/main/traffic_light_contract/README.md) to compile it.
-- Frontend is located in the `ping_pong_frontend` directory, it contains extra [instructions](https://github.com/Vara-Lab/traffic-light-integration/blob/main/traffic_light_frontend/README.md) to run the frontend!
+- The contract is located in `ping_pong_contract` directory, it contrains extra [instructions](https://github.com/Vara-Lab/Ping-Pong-integration/blob/main/ping_pong_contract/README.md) to compile it.
+- Frontend is located in the `ping_pong_frontend` directory, it contains extra [instructions](https://github.com/Vara-Lab/Ping-Pong-integration/blob/main/ping_pong_frontend/README.md) to run the frontend!
