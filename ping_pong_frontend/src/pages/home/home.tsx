@@ -120,7 +120,7 @@ function Home () {
                         return;
                     }
 
-                    const response = await sails.query('Query/LastWhoCall') as [string, string];
+                    const response = await sails.query('Ping/LastWhoCall') as [string, string];
 
                     console.log(response);
                     

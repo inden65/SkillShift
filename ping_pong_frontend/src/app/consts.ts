@@ -24,7 +24,7 @@ export const sponsorName = "";
 export const sponsorMnemonic = "";
 
 export const CONTRACT_DATA: ContractSails = {
-  programId: '0x84b6a64e165f46efd39e3b35876e03710b0fbe06fc896d50b5e096995836bb59',
+  programId: '0x2540e845a47e30f0ed70a29a179b3da3dd920a7e4f88a1be79a87f43256ce7ee',
   idl: `
     type PingEnum = enum {
       Ping,
@@ -38,9 +38,6 @@ export const CONTRACT_DATA: ContractSails = {
     service Ping {
       Ping : () -> PingEnum;
       Pong : () -> PingEnum;
-    };
-
-    service Query {
       query AllCalls : () -> vec struct { actor_id, PingEnum };
       query LastWhoCall : () -> struct { actor_id, PingEnum };
     };
