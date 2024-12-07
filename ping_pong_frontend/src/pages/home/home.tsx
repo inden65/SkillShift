@@ -1,12 +1,9 @@
 import { useState } from 'react';
-import {  Button } from '@/components/ui/button';
-import { useAccount, useAlert, useApi } from '@gear-js/react-hooks';
+import { Button } from '@gear-js/vara-ui';
+import { useAccount, useAlert } from '@gear-js/react-hooks';
 import { useSailsCalls } from '@/app/hooks';
 import { web3FromSource } from '@polkadot/extension-dapp';
-import { Sails } from 'sails-js';
-
 import "./examples.css";
-import SailsCalls from '@/app/SailsCalls';
 
 function Home () {
     const { account } = useAccount();
@@ -122,8 +119,6 @@ function Home () {
 
                     const response = await sails.query('Ping/LastWhoCall') as [string, string];
 
-                    console.log(response);
-                    
                     setStateEnum(response[1]);
                     setStateActorId(response[0]);
 

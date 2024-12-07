@@ -6,10 +6,10 @@ function Landing() {
   return (
     <Center>
       <VStack>
-      <Button textColor="black" bg="#00ffc4" as={Link} to="/home">
-        Ping Pong example
-      </Button>
-      </VStack>  
+        <Button textColor="black" bg="#00ffc4" as={Link} to="/home">
+          Ping Pong example
+        </Button>
+      </VStack>
     </Center>
   );
 }

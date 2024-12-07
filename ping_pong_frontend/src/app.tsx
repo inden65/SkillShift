@@ -1,28 +1,32 @@
-import { useEffect } from "react";
 import { useAccount, useApi } from "@gear-js/react-hooks";
 import { ApiLoader } from "@/components";
 import { Header } from "@/components/layout";
-import { withProviders } from "./app/hocs";
-import { useWalletSync } from "@/features/wallet/hooks";
+import { withProviders } from "@/app/hocs";
+import { useEnableWeb3 } from "./app/hooks";
 import { Routing } from "./pages";
-
 import { useInitSails } from "./app/hooks";
-import { CONTRACT_DATA } from "./app/consts";
+import { CONTRACT_DATA, sponsorName, sponsorMnemonic } from "./app/consts";
+import "@gear-js/vara-ui/dist/style.css";
 
 function Component() {
   const { isApiReady } = useApi();
-  const { isAccountReady } = useAccount();
+  const { isAccountReady, account } = useAccount();
+  const { web3IsEnable } = useEnableWeb3();
+  const isAppReady = isApiReady && isAccountReady && web3IsEnable;
 
   // Put your contract id and idl
   useInitSails({
     network: 'wss://testnet.vara.network',
     contractId: CONTRACT_DATA.programId,
-    idl: CONTRACT_DATA.idl
+    idl: CONTRACT_DATA.idl,
+    // You need to put name and mnemonic sponsor if you 
+    // will use vouchers feature (vouchers are used for gasless,
+    // and signless accounts)
+    vouchersSigner: {
+      sponsorName,
+      sponsorMnemonic
+    }
   });
-  
-  useWalletSync();
-
-  const isAppReady = isApiReady && isAccountReady;
 
   // App with context
   return (
