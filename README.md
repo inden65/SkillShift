@@ -26,12 +26,13 @@ You can work with the contract and frontend on gitpod!
 
 1. Contract compilation:
 
-- Rust: You need to have rust 1.81 or newer to be able to compile your contract: 
+- Rust: You need to have rust 1.83 or newer to be able to compile your contract, and the component rust-src:
 
 ```bash
-rustup install 1.81
-rustup default 1.81
+rustup install 1.83
+rustup default 1.83
 rustup target add wasm32-unknown-unknown
+rustup component add rust-src --toolchain 1.83-x86_64-unknown-linux-gnu
 ```
 
 - Next, you need to install the wasm-opt (to optimize WebAssembly files):
