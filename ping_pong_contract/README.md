@@ -66,17 +66,18 @@ If you don't have Rust installed, follow the steps below:
 
 If you already have installed rust, you need to check for updates:
 
-- To compile your contracts, you need to have rust 1.81 or newer to be able to compile the contract.
+- To compile your contracts, you need to have rust 1.83 or newer to be able to compile the contract.
 
     ```bash
-    rustup install 1.81
-    rustup default 1.81
+    rustup install 1.83
+    rustup default 1.83
     ```    
 
 - Then, you need to install the target to compile your contracts to Wasm (In case you don't have it):
 
     ```bash
     rustup target add wasm32-unknown-unknown
+    rustup component add rust-src --toolchain 1.83-x86_64-unknown-linux-gnu
     ```
 
 - Finally, you have to install a wasm-opt to optmize your contracts wasm files (In case you don't have it):
