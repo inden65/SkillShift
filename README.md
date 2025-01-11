@@ -1,6 +1,4 @@
-echo "# Proyecto Frontend
-
-Este documento detalla los pasos para configurar y ejecutar el proyecto en el entorno local.
+## SkillShift
 
 ## Pasos para ejecutar el proyecto
 
