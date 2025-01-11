@@ -1,0 +1,38 @@
+type Events = enum {
+  ProfesionistaAdded: actor_id,
+  ClienteAdded: actor_id,
+  TratoAdded: struct { actor_id, actor_id },
+  Error: str,
+};
+
+type Cliente = struct {
+  id: actor_id,
+  nombre: str,
+};
+
+type Profesionista = struct {
+  id: actor_id,
+  nombre: str,
+  especialidad: str,
+};
+
+type Trato = struct {
+  profesionista_id: actor_id,
+  cliente_id: actor_id,
+  descripcion: str,
+  pagos: [opt struct { u128, bool }, 5],
+};
+
+constructor {
+  New : ();
+};
+
+service Service {
+  AddCliente : (id: actor_id, nombre: str) -> Events;
+  AddProfesionista : (id: actor_id, nombre: str, especialidad: str) -> Events;
+  AddTrato : (profesionista_id: actor_id, cliente_id: actor_id, descripcion: str, pagos: [opt struct { u128, bool }, 5]) -> Events;
+  query QueryClientes : () -> vec Cliente;
+  query QueryProfesionistas : () -> vec Profesionista;
+  query QueryTratos : () -> vec Trato;
+};
+
