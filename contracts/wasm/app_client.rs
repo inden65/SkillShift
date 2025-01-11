@@ -11,12 +11,14 @@ pub struct AppFactory<R> {
     #[allow(dead_code)]
     remoting: R,
 }
+
 impl<R> AppFactory<R> {
     #[allow(unused)]
     pub fn new(remoting: R) -> Self {
         Self { remoting }
     }
 }
+
 impl<R: Remoting + Clone> traits::AppFactory for AppFactory<R> {
     type Args = R::Args;
     fn new(&self) -> impl Activation<Args = R::Args> {
@@ -30,12 +32,14 @@ pub mod app_factory {
         use super::*;
         use sails_rs::calls::ActionIo;
         pub struct New(());
+
         impl New {
             #[allow(dead_code)]
             pub fn encode_call() -> Vec<u8> {
                 <New as ActionIo>::encode_call(&())
             }
         }
+
         impl ActionIo for New {
             const ROUTE: &'static [u8] = &[12, 78, 101, 119];
             type Params = ();
@@ -46,11 +50,13 @@ pub mod app_factory {
 pub struct Ping<R> {
     remoting: R,
 }
+
 impl<R> Ping<R> {
     pub fn new(remoting: R) -> Self {
         Self { remoting }
     }
 }
+
 impl<R: Remoting + Clone> traits::Ping for Ping<R> {
     type Args = R::Args;
     fn ping(&mut self) -> impl Call<Output = PingEnum, Args = R::Args> {
@@ -74,36 +80,42 @@ pub mod ping {
         use super::*;
         use sails_rs::calls::ActionIo;
         pub struct Ping(());
+
         impl Ping {
             #[allow(dead_code)]
             pub fn encode_call() -> Vec<u8> {
                 <Ping as ActionIo>::encode_call(&())
             }
         }
+
         impl ActionIo for Ping {
             const ROUTE: &'static [u8] = &[16, 80, 105, 110, 103, 16, 80, 105, 110, 103];
             type Params = ();
             type Reply = super::PingEnum;
         }
         pub struct Pong(());
+
         impl Pong {
             #[allow(dead_code)]
             pub fn encode_call() -> Vec<u8> {
                 <Pong as ActionIo>::encode_call(&())
             }
         }
+
         impl ActionIo for Pong {
             const ROUTE: &'static [u8] = &[16, 80, 105, 110, 103, 16, 80, 111, 110, 103];
             type Params = ();
             type Reply = super::PingEnum;
         }
         pub struct AllCalls(());
+
         impl AllCalls {
             #[allow(dead_code)]
             pub fn encode_call() -> Vec<u8> {
                 <AllCalls as ActionIo>::encode_call(&())
             }
         }
+
         impl ActionIo for AllCalls {
             const ROUTE: &'static [u8] = &[
                 16, 80, 105, 110, 103, 32, 65, 108, 108, 67, 97, 108, 108, 115,
@@ -112,12 +124,14 @@ pub mod ping {
             type Reply = Vec<(ActorId, super::PingEnum)>;
         }
         pub struct LastWhoCall(());
+
         impl LastWhoCall {
             #[allow(dead_code)]
             pub fn encode_call() -> Vec<u8> {
                 <LastWhoCall as ActionIo>::encode_call(&())
             }
         }
+
         impl ActionIo for LastWhoCall {
             const ROUTE: &'static [u8] = &[
                 16, 80, 105, 110, 103, 44, 76, 97, 115, 116, 87, 104, 111, 67, 97, 108, 108,

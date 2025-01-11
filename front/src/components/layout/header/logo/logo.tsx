@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import { Image } from "@chakra-ui/react";
 import './logo.module.scss';
 
 function Logo() {
   return (
     <Link to="/">
-      <h1>LOGO</h1>
+      <Image src="logo.png" maxW={"15%"}/>
     </Link>
   );
 }

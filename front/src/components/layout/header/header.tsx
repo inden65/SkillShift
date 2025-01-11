@@ -8,9 +8,9 @@ interface Props {
 
 export function Header({ isAccountVisible }: Props) {
   return (
-    <header className={styles.header}>
+    <header className={styles.header} style={{ padding: 0 }}>
       <Logo />
-      {isAccountVisible && <Wallet theme='vara'/>}
+      {isAccountVisible && <Wallet theme='gear'/>}
       
     </header>
   );

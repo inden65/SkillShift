@@ -26,7 +26,7 @@ export const sponsorName = 'Alice';
 export const sponsorMnemonic = 'bottom drive obey lake curtain smoke basket hold race lonely fit walk';
 
 export const CONTRACT_DATA: ContractSails = {
-  programId: '0x2540e845a47e30f0ed70a29a179b3da3dd920a7e4f88a1be79a87f43256ce7ee',
+  programId: '0xeeac910c678b032cbe78ac0d5d8087ce46e2d6689ab1dece9478efd74b2e2bb8',
   idl: `
     type PingEnum = enum {
       Ping,
