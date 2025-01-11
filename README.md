@@ -39,4 +39,4 @@
   \`\`\`
 - Si surge algún problema durante la instalación o ejecución, verifica los logs en la terminal para identificar el error.
 
-¡Listo! Ahora el proyecto estará disponible en tu navegador en \`http://localhost:3000\` (o el puerto configurado)." > README.md
+¡Listo! revisa en \`http://localhost:3000\` (o el puerto configurado)." > README.md
