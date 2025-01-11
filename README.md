@@ -1,4 +1,4 @@
-# SkillShift
+echo"# SkillShift
 
 ## Project Description
 Provide displaced workers with a way to stay relevant, earn money, and utilize AI as a tool rather than a competitor.
